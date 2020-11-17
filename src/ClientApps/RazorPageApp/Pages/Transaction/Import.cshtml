@@ -1,0 +1,34 @@
+﻿@page
+@model RazorPageApp.Pages.ImportModel
+@{
+    ViewData["Title"] = "Import Data";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="mb-0">
+            Import Data
+        </h2>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Files" class="control-label"></label>
+                <input asp-for="Files" class="form-control form-control-lg" />
+                <span asp-validation-for="Files" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-success">Import</button>
+            <a class="btn btn-primary" asp-page="./TransactionList">Back to List</a>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

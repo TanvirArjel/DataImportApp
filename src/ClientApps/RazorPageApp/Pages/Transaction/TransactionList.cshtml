@@ -1,0 +1,76 @@
+﻿@page
+@model RazorPageApp.Pages.Transaction.TransactionListModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Transaction List";
+}
+
+<div class="border p-2 border-bottom-0">
+    <h2 class="d-inline-block mb-0">Transaction List</h2>
+    <a asp-page="./Import" class="btn btn-success float-right">Import Data</a>
+</div>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionList[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionList[0].Payment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionList[0].Status)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.ErrorMessage == null)
+            {
+                if (Model.TransactionList.Any())
+                {
+                    foreach (var item in Model.TransactionList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Payment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                <a class="badge badge-info" asp-page="./TransactionDetails" asp-route-employeeId="@item.Id">Details</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td class="text-center" colspan="6">No transaction data found in the database.</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div class="alert alert-danger rounded-0 mb-0">
+                            @Model.ErrorMessage
+                        </div>
+                    </td>
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>
